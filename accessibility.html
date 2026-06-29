@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility — restinggrumpyface</title>
+  <meta name="description" content="How yaAnnotator works with macOS accessibility — VoiceOver, keyboard navigation, color, reduced motion, and Voice Control.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <!-- <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a> -->
+      <!-- <a href="blog.html" class="nav__link">Blog</a> -->
+      <a href="https://github.com/restinggrumpyface" target="_blank" rel="noopener" class="nav__link">
+        GitHub
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M3.5 8.5L8.5 3.5M8.5 3.5H4.5M8.5 3.5V7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="prose-main">
+
+  <header class="prose-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;">Accessibility</div>
+    <h1 class="prose-head__title">Accessibility</h1>
+    <p class="prose-head__lede">
+      yaAnnotator works with macOS's built-in accessibility features — turn them on and the app responds automatically.
+    </p>
+  </header>
+
+  <section class="reveal lg prose">
+    <p>yaAnnotator works with macOS's built-in accessibility features. Turn them on in <strong>System Settings ▸ Accessibility</strong> — the app responds automatically, with nothing to enable inside yaAnnotator.</p>
+
+    <h2>VoiceOver</h2>
+    <p>Every control, image, and badge has a spoken label. Toggle VoiceOver with <strong>⌘F5</strong>.</p>
+    <ul>
+      <li><strong>Image list and grid</strong> — each thumbnail reads as one element: its name, annotation count, and approval / issue state.</li>
+      <li><strong>The canvas</strong> — the annotation surface reports the selected shape, its label, and its position.</li>
+      <li><strong>Report charts</strong> — each chart exposes an audio graph and a <em>Chart Details</em> rotor, so you can scrub a distribution and hear its shape; every bar and point also has a spoken label and value. Anything a chart does when tapped is mirrored in the toolbar's <strong>Filter</strong> menu, so it's reachable without a pointer.</li>
+      <li><strong>Live status</strong> — analysis starting or finishing, and a report filter being applied or cleared, are announced as they happen.</li>
+    </ul>
+
+    <h2>Keyboard navigation</h2>
+    <p>The <strong>List</strong> and <strong>Single-column</strong> image views are fully keyboard-navigable: arrow keys move the selection, <strong>Return</strong> opens an image, <strong>Delete</strong> removes it, and <strong>Esc</strong> deselects. (The <strong>Grid</strong> is pointer-driven — use List or Single-column for keyboard-only work.) The annotation tools and every menu command have shortcuts; see <strong>Keyboard Shortcuts</strong>.</p>
+
+    <h2>Appearance and color</h2>
+    <ul>
+      <li><strong>Dark / Light</strong> — choose <strong>System</strong>, <strong>Light</strong>, or <strong>Dark</strong> in <strong>Settings ▸ General</strong> (<strong>⌘,</strong>). The whole app, including the canvas, follows it.</li>
+      <li><strong>Legible badges</strong> — the annotation-count, size, and issue pills use fills tuned to stay readable against any thumbnail, in light or dark mode.</li>
+      <li><strong>Color is never the only cue</strong> — issue severity is shown with an icon and a count, not color alone, and the report charts respond to <strong>Differentiate Without Color</strong>. Label colors come from a colorblind-safe palette and can be changed per class in the <strong>Label Manager</strong> (<strong>⇧⌘L</strong>).</li>
+    </ul>
+
+    <h2>Reduced motion</h2>
+    <p>With <strong>Reduce Motion</strong> on, the app drops non-essential animation — scrolling the selected image into view, and the editor's panel reveal, become instant.</p>
+
+    <h2>Voice Control</h2>
+    <p>Menus, toolbars, sheets, and the <strong>List</strong> and <strong>Single-column</strong> views work with Voice Control's spoken names and dictation. Dictation is a quick way to type class labels and fill in <strong>Notes</strong> hands-free.</p>
+
+    <h2>Privacy</h2>
+    <p>These features run entirely on your Mac. Like the rest of yaAnnotator, they use no network and collect no telemetry.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer site-footer--prose">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>
