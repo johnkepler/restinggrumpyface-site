@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Accessibility — restinggrumpyface</title>
-  <meta name="description" content="How yaAnnotator works with macOS accessibility — VoiceOver, keyboard navigation, color, reduced motion, and Voice Control.">
+  <title>Accessibility · restinggrumpyface</title>
+  <meta name="description" content="How yaAnnotator works with macOS accessibility: VoiceOver, keyboard navigation, color, reduced motion, and Voice Control.">
   <link rel="stylesheet" href="./site.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
       restinggrumpyface
     </a>
     <nav class="nav" aria-label="Primary">
-      <!-- <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a> -->
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
       <!-- <a href="blog.html" class="nav__link">Blog</a> -->
       <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener" class="nav__link">
         GitHub
@@ -45,34 +45,34 @@
     <div class="eyebrow" style="margin-bottom:16px;">Accessibility</div>
     <h1 class="prose-head__title">Accessibility</h1>
     <p class="prose-head__lede">
-      yaAnnotator works with macOS's built-in accessibility features — turn them on and the app responds automatically.
+      yaAnnotator works with macOS's built-in accessibility features. Turn them on and the app responds automatically.
     </p>
   </header>
 
   <section class="reveal lg prose">
-    <p>yaAnnotator works with macOS's built-in accessibility features. Turn them on in <strong>System Settings ▸ Accessibility</strong> — the app responds automatically, with nothing to enable inside yaAnnotator.</p>
+    <p>yaAnnotator works with macOS's built-in accessibility features. Turn them on in <strong>System Settings ▸ Accessibility</strong>. The app responds automatically, with nothing to enable inside yaAnnotator.</p>
 
     <h2>VoiceOver</h2>
     <p>Every control, image, and badge has a spoken label. Toggle VoiceOver with <strong>⌘F5</strong>.</p>
     <ul>
-      <li><strong>Image list and grid</strong> — each thumbnail reads as one element: its name, annotation count, and approval / issue state.</li>
-      <li><strong>The canvas</strong> — the annotation surface reports the selected shape, its label, and its position.</li>
-      <li><strong>Report charts</strong> — the bar, distribution, and scatter charts expose an audio graph and a <em>Details rotor</em>, so you can scrub a distribution and hear its shape; every bar and point also has a spoken label and value, and the centroid heatmap carries a summary description. Anything a chart does when tapped is mirrored in the toolbar's <strong>Filter</strong> menu, so it's reachable without a pointer.</li>
-      <li><strong>Live status</strong> — analysis starting or finishing, and a report filter being applied or cleared, are announced as they happen.</li>
+      <li><strong>Image list and grid</strong>: each thumbnail reads as one element: its name, annotation count, and approval / issue state.</li>
+      <li><strong>The canvas</strong>: the annotation surface reports the selected shape, its label, and its position.</li>
+      <li><strong>Report charts</strong>: the bar, distribution, and scatter charts expose an audio graph and a <em>Details rotor</em>, so you can scrub a distribution and hear its shape; every bar and point also has a spoken label and value, and the centroid heatmap carries a summary description. Anything a chart does when tapped is mirrored in the toolbar's <strong>Filter</strong> menu, so it's reachable without a pointer.</li>
+      <li><strong>Live status</strong>: analysis starting or finishing, and a report filter being applied or cleared, are announced as they happen.</li>
     </ul>
 
     <h2>Keyboard navigation</h2>
-    <p>The <strong>List</strong> and <strong>Single-column</strong> image views are fully keyboard-navigable: arrow keys move the selection, <strong>Return</strong> opens an image, <strong>Delete</strong> removes it, and <strong>Esc</strong> deselects. (The <strong>Grid</strong> is pointer-driven — use List or Single-column for keyboard-only work.) The annotation tools and every menu command have shortcuts; see <strong>Keyboard Shortcuts</strong>.</p>
+    <p>The <strong>List</strong> and <strong>Single-column</strong> image views are fully keyboard-navigable: arrow keys move the selection, <strong>Return</strong> opens an image, <strong>Delete</strong> removes it, and <strong>Esc</strong> deselects. (The <strong>Grid</strong> is pointer-driven; use List or Single-column for keyboard-only work.) The annotation tools and every menu command have shortcuts; see <strong>Keyboard Shortcuts</strong>.</p>
 
     <h2>Appearance and color</h2>
     <ul>
-      <li><strong>Dark / Light</strong> — choose <strong>System</strong>, <strong>Light</strong>, or <strong>Dark</strong> in <strong>Settings ▸ General</strong> (<strong>⌘,</strong>). The whole app, including the canvas, follows it.</li>
-      <li><strong>Legible badges</strong> — the annotation-count, size, and issue pills use fills tuned to stay readable against any thumbnail, in light or dark mode.</li>
-      <li><strong>Color is never the only cue</strong> — issue severity is shown with an icon and a count, not color alone, and the report charts respond to <strong>Differentiate Without Color</strong>. Label colors come from a colorblind-safe palette and can be changed per class in the <strong>Label Manager</strong> (<strong>⇧⌘L</strong>).</li>
+      <li><strong>Dark / Light</strong>: choose <strong>System</strong>, <strong>Light</strong>, or <strong>Dark</strong> in <strong>Settings ▸ General</strong> (<strong>⌘,</strong>). The whole app, including the canvas, follows it.</li>
+      <li><strong>Legible badges</strong>: the annotation-count, size, and issue pills use fills tuned to stay readable against any thumbnail, in light or dark mode.</li>
+      <li><strong>Color is never the only cue</strong>: issue severity is shown with an icon and a count, not color alone, and the report charts respond to <strong>Differentiate Without Color</strong>. Label colors come from a colorblind-safe palette and can be changed per class in the <strong>Label Manager</strong> (<strong>⇧⌘L</strong>).</li>
     </ul>
 
     <h2>Reduced motion</h2>
-    <p>With <strong>Reduce Motion</strong> on, the app drops non-essential animation — scrolling the selected image into view, and the editor's panel reveal, become instant.</p>
+    <p>With <strong>Reduce Motion</strong> on, the app drops non-essential animation: scrolling the selected image into view, and the editor's panel reveal, become instant.</p>
 
     <h2>Voice Control</h2>
     <p>Menus, toolbars, sheets, and the <strong>List</strong> views work with Voice Control's spoken names and dictation. Dictation is a quick way to type class labels and fill in <strong>Notes</strong> hands-free.</p>
