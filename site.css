@@ -194,6 +194,9 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
 .btn-store__main { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
 .btn-store--dark { background: var(--text); color: var(--bg); }
 .btn-store--light { background: #fff; color: #15151f; }
+.btn-store--sm { padding: 8px 14px; gap: 8px; border-radius: 10px; }
+.btn-store--sm .btn-store__sub { font-size: 9px; }
+.btn-store--sm .btn-store__main { font-size: 13.5px; }
 
 /* ===== Layout helpers ===== */
 .container {
@@ -445,6 +448,8 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
   color: var(--muted);
   max-width: 460px;
 }
+.hero__lede a { color: var(--accent); font-weight: 500; }
+.hero__lede a:hover { text-decoration: underline; }
 .hero__ctas {
   margin-top: 34px;
   display: flex;
@@ -488,10 +493,92 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
   letter-spacing: -.015em;
   font-weight: 500;
 }
+.software {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px var(--gutter) 100px;
+}
+.software__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.software__card {
+  display: block;
+  position: relative;
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+/* Stretched link: the whole card clicks through to the title's href, while the
+   store button sits above it as its own link. */
+.software__card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.software__card .btn-store {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+}
+.software__card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+.software__meta {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 4px 11px;
+}
+@media (max-width: 700px) {
+  .software__grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 860px) {
   .hero__grid { grid-template-columns: 1fr; padding: 72px var(--gutter) 64px; gap: 36px; }
   .features__grid { grid-template-columns: 1fr; }
   .features { padding-top: 56px; }
+}
+
+/* ===== Product subnav (yaAnnotator · release notes · help) ===== */
+.subnav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 26px var(--gutter) 0;
+  margin-bottom: -52px;
+}
+/* Inside a padded text column (releases, help, prose), sit in the column's
+   existing top padding instead of overlapping the page header. -70px puts the
+   pills 26px below the site header, matching the product page's 26px padding. */
+.prose-main > .subnav,
+.releases-main > .subnav {
+  padding: 0;
+  margin: -70px 0 38px;
+}
+.subnav__link {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+.subnav__link:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.subnav__link[aria-current="page"] {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--border);
 }
 
 /* ===== Product page (yaAnnotator) ===== */
@@ -976,6 +1063,33 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
 .blog-outro a { color: var(--accent); }
 .blog-outro a:hover { text-decoration: underline; }
 
+/* Footnotes ([^1] in posts; rendered by build.py) */
+.fn-ref { scroll-margin-top: 84px; }
+.fn-ref a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0 1px;
+}
+.fn-ref a:hover { text-decoration: underline; }
+.footnotes {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.footnotes ol { margin: 0; padding-left: 20px; }
+.footnotes li { margin: 0 0 10px; scroll-margin-top: 84px; }
+.footnotes li:last-child { margin-bottom: 0; }
+.fn-back {
+  margin-left: 5px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.fn-back:hover { text-decoration: underline; }
+
 /* ===== Prose (privacy, acknowledgements, and future text pages) ===== */
 .prose-main {
   max-width: 720px;
@@ -1024,3 +1138,89 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
   padding-left: 22px;
 }
 .prose li { margin: 0 0 10px; }
+
+/* ===== Help (help.html + help-*.html) ===== */
+.prose ol {
+  margin: 0 0 18px;
+  padding-left: 24px;
+}
+.prose ol li { margin: 0 0 10px; }
+.prose code {
+  font-family: var(--mono);
+  font-size: .88em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0 26px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.prose thead th {
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.prose td:last-child { color: var(--muted); }
+.prose .help-shot {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  margin: 6px 0 28px;
+}
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+.eyebrow a:hover { text-decoration: underline; }
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 4px 0 34px;
+}
+.help-card {
+  display: block;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.help-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+.prose .help-card:hover { text-decoration: none; }
+.help-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  letter-spacing: -.015em;
+  color: var(--text);
+}
+.help-card p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+@media (max-width: 640px) {
+  .help-grid { grid-template-columns: 1fr; }
+}

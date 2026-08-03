@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Annotating · yaAnnotator help · restinggrumpyface</title>
+  <meta name="description" content="The yaAnnotator window and editor: drawing boxes, polygons, and masks, the inspector, organizing images and splits, and review tools.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="prose-main">
+
+  <nav class="subnav" aria-label="yaAnnotator">
+    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
+    <a href="releases.html" class="subnav__link">Release notes</a>
+    <a href="help.html" class="subnav__link" aria-current="page">Help</a>
+  </nav>
+
+  <header class="prose-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;"><a href="help.html">yaAnnotator help</a></div>
+    <h1 class="prose-head__title">Annotating</h1>
+    <p class="prose-head__lede">
+      The window, the editor canvas, and the day-to-day of drawing, refining, and organizing annotations.
+    </p>
+  </header>
+
+  <section class="reveal lg prose">
+
+    <h2>The window</h2>
+    <p>Every yaAnnotator document is a <strong>library</strong> that holds one or more <strong>projects</strong>; each project maps to a dataset. The <strong>projects sidebar</strong> on the left lists them all. Expand a project to choose what the content area shows: <strong>All Images</strong>, a <strong>split</strong> (Train, Validation, Test), <strong>Notes</strong>, the <strong>Report</strong>, or <strong>Export</strong>. The <strong>+</strong> button adds a project or imports a whole dataset as one.</p>
+    <p>The image list switches between <strong>List</strong>, <strong>Grid</strong>, and <strong>Single-column</strong> views (⌃⌘1/2/3). The <strong>Show</strong> menu overlays annotations, issue badges, per-kind annotation counts, pixel size, and split names on thumbnails; the <strong>Filter</strong> menu narrows the list by issues, class, object size, and other report findings. Open an image for editing with Return or a double-click; in List view, Space gives a Quick Look preview instead.</p>
+
+    <h2>The editor</h2>
+    <img class="help-shot" src="images/ya-help-editor.jpg" alt="The yaAnnotator annotation editor with a polygon selected and the inspector open">
+    <p>The canvas is where you label. Zoom with ⌘+/−/0, pinch, or the toolbar slider; scroll or drag to pan. The toolbar holds the tool picker (Select, Box, Polygon, Smart Select), <strong>Assist</strong> for model suggestions, the zoom controls, the approval seal, undo/redo, and the inspector toggle. You can rearrange the toolbar the standard Mac way, and every toolbar action is mirrored in the menus.</p>
+    <p><strong>View ▸ Canvas Layers</strong> hides whole annotation kinds (boxes, polygons, or masks) while you focus on one; <strong>Show Labels</strong> (⌃⌘L) hides just the captions.</p>
+
+    <h2>Drawing</h2>
+    <ul>
+      <li><strong>Box</strong> (B): drag to create. With Select (V), drag the 8 handles to resize or the body to move.</li>
+      <li><strong>Polygon</strong> (P): click to drop vertices; close it by clicking the first vertex, double-clicking, or pressing Return. Esc cancels. With Select: drag a vertex to move it, click an edge to add one, or pick a vertex and press ⌫ to remove it.</li>
+      <li><strong>Smart Select</strong> (S): click an object and it traces the outline for you, as a polygon (or a pixel mask, with Pro). See <a href="help-assist.html">Model-assisted labeling</a>.</li>
+      <li><strong>Combine</strong> (⌘J): ⌘-click several annotations in the Annotations list and merge them into one. Boxes merge into one enclosing box; with a polygon in the mix, the pieces are stitched into a single outline.</li>
+      <li><strong>Convert to rotated box</strong> (⇧⌘R): replace a polygon, or a multi-selection, with its tightest oriented rectangle. Good for long, angled objects where an upright box would be loose.</li>
+      <li><strong>Nudge</strong> a selection one pixel with the arrow keys (⇧ for ten); hold ⌥ while dragging to skip edge snapping; drag a marquee on empty canvas to select several annotations.</li>
+      <li><strong>Delete</strong> with ⌫, and undo anything with ⌘Z.</li>
+    </ul>
+
+    <h2>The inspector (⌥⌘I)</h2>
+    <ul>
+      <li><strong>Selection</strong>: a zoomed crop of the selected annotation; drag its handles or vertices to refine.</li>
+      <li><strong>Proposals</strong>: accept or clear model-suggested annotations.</li>
+      <li><strong>Annotations</strong>: every annotation on the image with its label and kind (a pixel mask gets a checkerboard icon). Select one to edit, toggle the eye to hide it temporarily, or combine and delete from the list.</li>
+      <li><strong>Labels</strong>: click a label to make it active for new annotations. Manage the full label set, colors included, in the Label Manager (⇧⌘L).</li>
+      <li><strong>Issues</strong>: findings from the report that may affect training quality.</li>
+    </ul>
+
+    <h2>Organizing images</h2>
+    <ul>
+      <li><strong>Select many</strong>: click, ⇧-click for a range, ⌘-click to add or remove, ⌘A for all. Arrow keys move the selection in every view.</li>
+      <li><strong>Set a split</strong>: drag selected images onto a split in the sidebar, or right-click ▸ Set Split. Manage splits from the split filter's menu.</li>
+      <li><strong>Move between projects</strong>: drag images onto another project to copy them in, annotations and all. Cut / Copy / Paste (⌘X / ⌘C / ⌘V) does the same from the keyboard.</li>
+      <li><strong>Remove</strong> (⌫): takes images out of the project. The original files on disk are never deleted.</li>
+    </ul>
+
+    <h2>Reviewing</h2>
+    <ul>
+      <li>Mark an image <strong>approved</strong> with the seal button or ⇧⌘A; the Filter menu can narrow to Approved or Not Approved.</li>
+      <li>Confirm a truly-empty image with <strong>Mark as Null</strong> (∅). The report then treats it as a confirmed negative, and export can drop the unconfirmed ones. See <a href="help-report.html">Analyze Annotations</a>.</li>
+    </ul>
+
+    <h2>Notes</h2>
+    <p>Each project has a <strong>Notes</strong> row in the sidebar: a plain-text place for your labeling rules and edge cases. If an imported dataset ships a top-level README, its text seeds the notes automatically; exporting writes them back out beside the dataset as <code>README.yaannotator.txt</code>, so your rules travel with the data.</p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer site-footer--prose">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model-assisted labeling · yaAnnotator help · restinggrumpyface</title>
+  <meta name="description" content="yaAnnotator's Assist detectors, Smart Select click-to-segment, pixel masks, custom Core ML models, and batch detection, all on-device.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="prose-main">
+
+  <nav class="subnav" aria-label="yaAnnotator">
+    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
+    <a href="releases.html" class="subnav__link">Release notes</a>
+    <a href="help.html" class="subnav__link" aria-current="page">Help</a>
+  </nav>
+
+  <header class="prose-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;"><a href="help.html">yaAnnotator help</a></div>
+    <h1 class="prose-head__title">Model-assisted labeling</h1>
+    <p class="prose-head__lede">
+      Let a model do the first pass: built-in detectors, click-to-segment Smart Select, your own Core ML models, and batch runs. Everything runs on your Mac.
+    </p>
+  </header>
+
+  <section class="reveal lg prose">
+
+    <h2>Assist</h2>
+    <p>Open <strong>Assist</strong> (the wand) in the editor toolbar and pick a detector. Each proposal appears as a dashed box or polygon labeled with its class and confidence, e.g. <em>player (92%)</em>. Hover one on the canvas for quick accept / reject buttons, or work from the inspector's <strong>Proposals</strong> section: its confidence slider hides weak proposals live, and <strong>Accept All</strong> (⌘↩) keeps the visible ones. Accepted proposals become normal annotations, and a new label is created for any class you don't already have.</p>
+
+    <h2>Built-in detectors</h2>
+    <ul>
+      <li><strong>Detect Multiple (RF-DETR)</strong> (⌃⌘M): finds 80 common object classes (people, vehicles, animals, everyday objects) with a bundled RF-DETR Nano model.</li>
+      <li><strong>Detect People (Boxes / Polygons)</strong>, <strong>Animals</strong>, <strong>Faces</strong>, and <strong>Text</strong>: powered by Apple's Vision framework.</li>
+      <li><strong>Subjects (Polygons)</strong>: outlines the main foreground objects of any kind, labeled <em>subject</em> for you to reassign. A real segmentation to start from instead of a blank canvas.</li>
+    </ul>
+
+    <h2>Custom models</h2>
+    <p>Bring your own object detector for your own classes: a Core ML <code>.mlmodel</code> or <code>.mlpackage</code>. One-time setup, offline afterwards:</p>
+    <ol>
+      <li><strong>Get a model.</strong> Search Hugging Face for Core ML object detectors, train your own with Create ML on a dataset you export from yaAnnotator, or convert an existing model with <code>coremltools</code>. For RF-DETR, the open-source <a href="https://github.com/johnkepler/supreme-tribble" target="_blank" rel="noopener">RF-DETR to Core ML converter</a> produces a model yaAnnotator decodes directly, class names included.</li>
+      <li>In <strong>Settings ▸ Detection</strong>, click <strong>Choose Model…</strong> and pick the file.</li>
+      <li>If the model is a raw-tensor detector whose class names aren't in its metadata, enter them comma-separated in Settings ▸ Detection, in the model's output order. Otherwise proposals come back as <em>class_1, class_2, …</em></li>
+    </ol>
+    <p>Run it from <strong>Assist ▸ Detect with "your model"</strong>, or ⇧⌘D.</p>
+
+    <h2>Detect across many images at once</h2>
+    <p>In the list or grid, select several images (⌘-click, ⇧-click, or ⌘A), then pick any command from <strong>Tools ▸ Detect</strong>. It runs that detector over every selected image and accepts all proposals automatically. There's no per-image review, so the app confirms first, and by default skips images that already have annotations. Because a batch can add a lot at once, you remove one by re-selecting those images and deleting.</p>
+
+    <h2>Tuning (Settings ▸ Detection)</h2>
+    <p>Three filters apply to the next run of any detector, built-in or custom: <strong>Minimum confidence</strong>, <strong>Max detections</strong>, and <strong>Minimum box size</strong>. Defaults are permissive; tighten them to cut false positives.</p>
+
+    <h2>Smart Select</h2>
+    <p><strong>Smart Select</strong> turns a single click into an object outline. Choose the sparkle-lasso tool (S) and click an object; it traces a polygon for you to label and refine like any other annotation. The first click on an image takes a moment to prepare; clicks after that are quick.</p>
+    <p>It ships with <strong>SAM 2.1 Tiny</strong>, a small, fast Apache-2.0 Core ML model, so it works at install with nothing to download. For more accuracy, point it at a bigger variant: download one of Apple's <code>coreml-sam2.1-small</code> / <code>baseplus</code> / <code>large</code> releases from Hugging Face, then use <strong>Load Custom Model…</strong> in Settings ▸ Smart Select. A compatible model is a Core ML build of SAM 2 split into its encoder / prompt-encoder / decoder parts, named as in Apple's releases.</p>
+    <p><strong>Tip:</strong> click the whole subject to select all of it, or a distinct part (a jersey, a stick) to select just that part; the <strong>Click selects</strong> setting biases which you get.</p>
+    <p>Tuning lives in <strong>Settings ▸ Smart Select</strong>: <strong>Detail</strong> (how closely the outline follows), <strong>Output</strong> (polygon, pixel mask, or bounding box), <strong>Edge</strong> (tighten or loosen at the boundary), and <strong>Click selects</strong>.</p>
+
+    <h2>Pixel masks</h2>
+    <p>With <strong>Output</strong> set to <strong>Pixel mask</strong> (creation is Pro; viewing, converting, importing, and exporting masks is free), Smart Select keeps the model's selection exactly: every pixel, including holes and separate pieces a polygon outline can't hold.</p>
+    <ul>
+      <li><strong>Refine with clicks</strong>: while the mask is selected and Smart Select is active, click to add the region under the cursor, ⌥-click to remove it. Each click is one undo step; press Return when you're done.</li>
+      <li><strong>Segment Selected Box</strong> (Tools menu): re-runs Smart Select inside a selected box annotation, a quick way to turn a detector's box into a tight outline or mask.</li>
+      <li><strong>Convert one-way</strong>: <strong>Convert Mask to Polygon</strong> traces the mask's largest region as an editable polygon (lossy; undo is the way back). <strong>Convert to Box</strong> keeps just the bounding box.</li>
+      <li><strong>View ▸ Canvas Layers</strong> hides whole kinds on the canvas, e.g. hide boxes and polygons to review just the masks.</li>
+    </ul>
+
+    <h2>Annotating frames and bursts</h2>
+    <p><strong>Tools ▸ Paste Annotations from Previous Image</strong> (⌥⌘V) copies the previous image's annotations onto the current one, ready to nudge into place. It pairs well with <a href="help-import-export.html">video frames import</a>.</p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer site-footer--prose">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>

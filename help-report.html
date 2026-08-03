@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analyze Annotations · yaAnnotator help · restinggrumpyface</title>
+  <meta name="description" content="yaAnnotator's data-quality report: class balance, geometry, validity checks, duplicate and leakage detection, and one-click fixes.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="prose-main">
+
+  <nav class="subnav" aria-label="yaAnnotator">
+    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
+    <a href="releases.html" class="subnav__link">Release notes</a>
+    <a href="help.html" class="subnav__link" aria-current="page">Help</a>
+  </nav>
+
+  <header class="prose-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;"><a href="help.html">yaAnnotator help</a></div>
+    <h1 class="prose-head__title">Analyze Annotations</h1>
+    <p class="prose-head__lede">
+      A fast, on-device check over a project that highlights the kinds of mistakes that hurt a training set, before you train on them.
+    </p>
+  </header>
+
+  <section class="reveal lg prose">
+
+    <p>Open the report from the project's <strong>Report</strong> row in the sidebar, or <strong>File ▸ Analyze Annotations…</strong>. It's split into sections you switch between at the top, each pairing a short explanation with charts. <strong>Click a chart bar to see just those images</strong> in the list.</p>
+    <img class="help-shot" src="images/ya-help-report.jpg" alt="The Analyze Annotations report's Overview section with image and annotation counts">
+
+    <h2>The sections</h2>
+    <ul>
+      <li><strong>Overview</strong>: image, annotation, and label counts, how many images are empty, and the split breakdown.</li>
+      <li><strong>Class Balance</strong>: per-label counts and how skewed (or unlabeled) the classes are.</li>
+      <li><strong>Geometry</strong>: image sizes and aspect ratios (so you can plan a consistent resize), plus box-size and aspect-ratio spreads, outliers, and where objects sit in the frame. A center bias can train models to overweight the middle of the image.</li>
+      <li><strong>Validity Issues</strong>: the per-annotation findings, grouped by check.</li>
+      <li><strong>Export Integrity</strong>: problems that might block or corrupt an export.</li>
+    </ul>
+
+    <h2>What it checks</h2>
+    <p>Each finding is <strong>Info</strong> (often intentional), <strong>Warning</strong> (probably a mistake), or <strong>Error</strong> (invalid or export-blocking):</p>
+    <ul>
+      <li><strong>Boxes</strong>: out-of-bounds, zero-area, very tiny, extreme aspect ratios, or heavily-overlapping duplicates.</li>
+      <li><strong>Polygons</strong>: fewer than three points, an oversized vertex count (usually a machine-traced outline; a Simplify fix is offered), or a saved box that doesn't match the outline (often intentional, flagged for review only).</li>
+      <li><strong>Images</strong>: no annotations (negatives are fine, and a marked-null ∅ image counts as confirmed), a missing pixel size, a duplicated name, or a <strong>near-duplicate</strong> of another image caught by perceptual hashing. A near-duplicate in a different split is flagged as data leakage, which inflates every score.</li>
+      <li><strong>Labels</strong>: annotations with no label, which every export format drops.</li>
+      <li><strong>Files</strong> (opt-in, Settings ▸ Report ▸ Verify image files): each referenced file checked for missing, unreadable, or corrupt data, with a Remove fix and a Re-link path for moved files.</li>
+    </ul>
+
+    <h2>Fixing issues</h2>
+    <p>Every finding has an <strong>Open</strong> link that jumps to the image and selects the annotation. Mechanical problems also offer a <strong>Fix</strong> or <strong>Fix all…</strong> (with a preview and count):</p>
+    <ul>
+      <li><strong>Delete</strong> duplicate, zero-area, or invalid shapes.</li>
+      <li><strong>Clamp to frame</strong>: pull an out-of-bounds box or polygon back inside the image.</li>
+      <li><strong>Remove near-duplicates</strong>: for each group of visually identical images, keep the most-annotated one and remove the rest from the project. Especially useful after a <a href="help-import-export.html">video-frames import</a> at a high frame rate. Files on disk are never deleted.</li>
+    </ul>
+    <p>The rest are review-only: they probably need your judgment, so edit them in the canvas. A fix applied from the report isn't undoable there; for a reversible edit, open the image and change it in the editor.</p>
+
+    <h2>Issue flags in the list</h2>
+    <p>Images with findings show a severity-colored badge on their thumbnails, List view adds a sortable <strong>Issues</strong> column, and the toolbar's <strong>Filter</strong> menu can narrow the list to Has Issues or No Issues. After you edit a project, a banner notes the report is out of date with a <strong>Re-analyze</strong> button; turn on <strong>Settings ▸ Report ▸ Re-analyze automatically after edits</strong> to have it recompute shortly after you stop editing.</p>
+
+    <h2>Tuning (Settings ▸ Report)</h2>
+    <p>The thresholds are yours to adjust: what counts as a tiny box or a rare class, the oversized-polygon vertex limit, and the chart and outlier parameters. Raise the tiny-box threshold for wide-field or sports imagery where small objects are valid. Threshold changes apply on the next analysis, so re-run the report.</p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer site-footer--prose">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>

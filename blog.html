@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog · restinggrumpyface</title>
+  <meta name="description" content="I've been told I look grumpy. These are notes on building stuff. Sometimes by myself. Mostly with Claude. Apparently for iOS and the Mac.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link" aria-current="page">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="blog-main">
+
+  <header class="blog-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;">Writing</div>
+    <h1 class="blog-head__title">Notes from a human</h1>
+    <p class="blog-head__lede">
+      Notes on building stuff.  Sometimes by myself. Mostly with Claude. Apparently for iOS and the Mac.
+    </p>
+  </header>
+
+  <article class="reveal lg post">
+    <div class="post__meta">
+      <time datetime="2026-06-21">June 21, 2026</time>
+      <span class="dot">·</span>
+      <span>6 min read</span>
+    </div>
+    <h2 class="post__title">I built a thing. It's called yaAnnotator. You should check it out.</h2>
+    <div class="post__body">
+      <p>I like building things. Probably more than I like running or playing with things. I was the guy that was building a perfect society in StarCraft while Zerglings overan my city. SimCity was my kryptonite. I was always more interesting in shell scripts and perl scripts than giant apps. I am always trying to build a re-usable workbook when all I really have to do is build a quick spreadsheet. I guess I like systems and tools. This is the story of how I built a MacOS utility application while starting to build an iOS app.</p>
+      <p>My professional background is in scripting languages of every kind, Java, and enterprise web applications. I've also been a Mac geek for years and have thought a lot about building my own MacOS or iOS apps. But my half-hearted attempts at building an iOS app always stalled at the tutorial level. Like everything else I've ever learned, I needed a project or a client to drive me, and that motivation was never quite strong enough to get me over the mountain of domain knowledge I'd have to climb first. But lately, like everyone else, I've spent the last year obsessing over LLMs and AI-assisted coding. Enter Claude. Claude helped me build something cool<sup class="fn-ref" id="fnref-i-built-a-thing-it-is-called-yaannotator-1"><a href="#fn-i-built-a-thing-it-is-called-yaannotator-1">1</a></sup>, taught me the basics of macOS and iOS app development, and sent me down a string of super fun side quests.</p>
+      <p>My first idea came out of my side job as a kids' sports taxi driver. I spend a lot of hours driving my kids to sports and then watching the practices and games. Somewhere in there I started looking at sports apps. There are a lot of fun apps that record and analyze video. Cameras that other teams and parents hoist on super tall tripods that record and analyze games. Some more focused tools that claim to analyze game or player mechanics and suggest improvements. That took me down a side quest to understand how all of these tools work. Which led me to the current state of computer vision and ML models. That all seems pretty cool but it all seemed to rely on models and code in the cloud. Apple has been making noise for a while about ML models. so what works on iOS? So with the help of Claude I got a working app going on iOS but kept hitting the limits of the vision models available to me. That part alone was a thrill. I had a real, working iOS app doing object recognition. Something that I could keep iterating on. But more importantly, I finally understood more about how a modern Swift app gets built. So I reactivated my Apple developer account, started reading documentation, and watched WWDC videos. I'm no expert. I depend heavily on the skills that other experts are releasing into the world to tell me what good looks like in modern Swift development. And I'm a long, long way from building on my own. But the same skills I use every day directing Claude and similar tools for co-development carried me much further than I ever expected. And that is the promise of burning all of the tokens on LLMs, isn't it? Turbo charge our development cycles, while hopefully bringing our skills as developers to help recognize what good looks like<sup class="fn-ref" id="fnref-i-built-a-thing-it-is-called-yaannotator-2"><a href="#fn-i-built-a-thing-it-is-called-yaannotator-2">2</a></sup>.</p>
+      <p>And that ML model side quest kept going. I dug into which models run well on iOS, what's actually out there, and how models get trained in the first place. There are a lot of really great models out there that have general object recognition capabilities. Some of them even run decently on iOS. But if you want to recognize something specific, and do it reliably, you start to hunt for ML Models that are trained on specific datasets. Essentially thousands of images of the objects you want to recognize, all labeled with bounding boxes, or polygons, or masks. In sports vision, the big sports get a lot of attention. Football (not American) has piles of models and public datasets fully annotated with labels. Other sports, not so much. The models that work beautifully on football (still talking about soccer) don't fully generalize to other sports, except at the very highest level.</p>
+      <p>So I read up on training models with custom datasets, and briefly got lost in Hugging Face and Roboflow. Turns out I did need my own model, especially if I didn't want to depend on online services and calling APIs. And models that run locally on iOS come with their own specific requirements. After one more side quest into the many ways to train a model, Roboflow model training tools, Apple's CreateML application, and converting models like RF-DETR to CoreML, I came up for air and started labeling images.</p>
+      <p>I started using Roboflow and then Label Studio. I didn't love either one. There were subscription costs. There was the jankiness of working in a browser. There was the mountain of python installs. Turns out there are a few apps on the App Store, but they seemed too limited to me, or had not been updated in a while. But let's be honest, I just wanted to build my own thing. So I decided take my workflow local. Uh oh. Another side quest. So I built a macOS app to annotate images and export datasets for object recognition model training. It works for me. Pretty darn well, in fact. And that made me wonder whether other people might want it too. People like me, before all these side quests, who don't want to pay a subscription, don't need a big web-based collaboration tool, and don't want to install a mountain of Python tooling. Surely there is at least one other person out there in the world who would find this useful. Welp. Side quest number four was about how the heck you release a MacOS app into the world these days. And side quest number five was this web site.</p>
+      <p>But here's what came out of side quest number three: <a href="/yaAnnotator.html">yaAnnotator</a>. Yet another Annotator. A macOS app for building object-detection datasets entirely on your Mac. Import and export the most common dataset formats. I bundle two models to enable "smart select" and object detection on a whole image to get you started. Bring your own models to speed up annotation even more. And this is all pre-MacOS 27. I'm actively using it. I hope you will too. Go get it from the App store and build the dataset of your dreams.</p>
+      <p>There are probably a lot more features to add. But somebody famous once said: "Real Artists Ship." So Version 1 is out, version 1.2 is on its way, and I am excited to incorporate MacOS 27. And I might even get back to that first idea one of these days ...</p>
+      <div class="footnotes" role="doc-endnotes">
+      <ol>
+        <li id="fn-i-built-a-thing-it-is-called-yaannotator-1">It is just as true to say that all of the skills out there helped me learn the basics of macOS and iOS app development. <a class="fn-back" href="#fnref-i-built-a-thing-it-is-called-yaannotator-1" aria-label="Back to reference 1">↩</a></li>
+        <li id="fn-i-built-a-thing-it-is-called-yaannotator-2">Enter skills again. In the spirit of building tools to build tools to build tools, I spent quite a while tuning my development workflow and ensuring that I was encoding what I was learning in skills files of my own. <a class="fn-back" href="#fnref-i-built-a-thing-it-is-called-yaannotator-2" aria-label="Back to reference 2">↩</a></li>
+      </ol>
+      </div>
+    </div>
+  </article>
+
+  <div class="reveal blog-outro">
+    <p>
+      More soon. In the meantime, questions and bug reports are welcome on
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+  </div>
+
+</main>
+
+<footer class="site-footer site-footer--blog">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>

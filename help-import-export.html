@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Import &amp; export · yaAnnotator help · restinggrumpyface</title>
+  <meta name="description" content="Importing and exporting datasets with yaAnnotator: COCO, YOLO, CreateML, CVAT, Pascal VOC, video frames, augmentation, presets, and data preservation.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="prose-main">
+
+  <nav class="subnav" aria-label="yaAnnotator">
+    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
+    <a href="releases.html" class="subnav__link">Release notes</a>
+    <a href="help.html" class="subnav__link" aria-current="page">Help</a>
+  </nav>
+
+  <header class="prose-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;"><a href="help.html">yaAnnotator help</a></div>
+    <h1 class="prose-head__title">Import &amp; export</h1>
+    <p class="prose-head__lede">
+      Round-trip datasets in the formats your stack already uses, pull frames out of video, and shape what gets written on the way out.
+    </p>
+  </header>
+
+  <section class="reveal lg prose">
+
+    <h2>Importing a dataset</h2>
+    <p>Already have labeled images? Point yaAnnotator at the folder; the format is detected for you. There are two ways in:</p>
+    <ul>
+      <li><strong>Import Dataset Split</strong> (⇧⌘I): adds one dataset folder to the project you have open. Its images are tagged with a split named after the folder, so a <em>train</em> or <em>valid</em> folder becomes a split you can filter by.</li>
+      <li><strong>Import Dataset</strong> (the <strong>+</strong> menu in the sidebar): for a folder whose subfolders are the splits. It creates a new project and brings in each subfolder as a split. If you pick the wrong one for the folder you chose, yaAnnotator points you to the other.</li>
+    </ul>
+    <p>An import sheet opens first. It shows the detected format and, when the dataset has segmentations, lets you choose <strong>Import segmentations as pixel masks</strong> (on by default): leave it on to keep COCO RLE masks and multi-part polygons exact, or turn it off to trace a single outline of the largest piece instead. A one-part polygon always imports as a polygon.</p>
+    <p>Supported formats, detected automatically: <strong>COCO</strong> (boxes, polygons, and RLE masks), <strong>YOLO</strong> (with <code>data.yaml</code> splits), <strong>CreateML</strong> (boxes only), <strong>CVAT</strong> (boxes and polygons, label colors preserved), and <strong>Pascal VOC</strong> (boxes only). Images are matched by file name and referenced in place, labels are matched to yours by name, out-of-bounds boxes are pulled back inside, and files that aren't decodable images are rejected with the reason named.</p>
+
+    <h2>Importing video frames <em>(Pro)</em></h2>
+    <p><strong>File ▸ Import Video Frames…</strong> turns a stretch of video into images you can annotate. Pick any video, set the range and frames per second (the sheet shows the resulting frame count live, with a limit of 2,000 frames per pass, plus an honest size estimate and the destination's free space), then pick a destination folder. Frames are written as JPEGs and imported by reference, so keep the folder. A <strong>Longest side</strong> control (Original / 1920 / 1280 px) is the storage lever for 4K video.</p>
+    <p>Frame order matches time order, so <strong>Paste Annotations from Previous Image</strong> (⌥⌘V) carries labels from frame to frame while you adjust. Cancelling mid-extraction deletes everything written so far, and the report's duplicate check helps spot a frame rate set too high.</p>
+
+    <h2>Exporting a dataset</h2>
+    <img class="help-shot" src="images/ya-help-export.jpg" alt="The yaAnnotator Export pane showing format, preprocessing, and augmentation options">
+    <p>Open the project's <strong>Export</strong> row in the sidebar (⌘E), pick a format, set options, then <strong>Export…</strong> and choose a destination. The dataset is written to a subfolder named after the project, and you're warned before replacing an existing one. By default an export references your images where they sit and writes only the labels; turn on <strong>Copy image files</strong> to write the images too (it switches on automatically whenever an option rewrites pixels). The footer sums up what you'll get, image counts, augmented copies, and estimated size, before anything is written.</p>
+
+    <h3>Preprocessing</h3>
+    <ul>
+      <li><strong>Remove unannotated images</strong>: off by default, since unannotated images are valid negative samples.</li>
+      <li><strong>Remove unconfirmed empty images</strong>: a finer cut that keeps images you've explicitly marked null (∅) while dropping probable missing annotations.</li>
+      <li><strong>Pixel masks (PNG)</strong>: also write a <code>masks/</code> folder of per-image class-index PNGs rendered from your masks and polygons, ready-made semantic-segmentation ground truth.</li>
+      <li><strong>Filter classes</strong>: uncheck a class to leave it out.</li>
+      <li><strong>Resize</strong>: scale every image to a square, padded to keep aspect ratio, at 320 to 1280 px or a custom size. Boxes and polygons move with the pixels.</li>
+      <li><strong>Isolate objects</strong> <em>(Pro)</em>: crop each labeled box to its own image, foldered by class, a ready-made classification dataset alongside the detection export.</li>
+    </ul>
+
+    <h3>Augmentation <em>(Pro)</em></h3>
+    <p>Generate extra training copies with boxes and polygons transformed in lockstep with the pixels. Each option adds one copy per image at its slider value, with a live thumbnail preview: geometric (flips, rotations, crop), photometric (brighten, darken, exposure, saturation), and blur &amp; noise (blur, motion blur, noise). Augmentation multiplies a few hundred labeled images into the thousands a robust detector needs, without online services or scripts.</p>
+
+    <h3>Presets</h3>
+    <p>Three built-in presets, <em>Create ML Object Detection</em>, <em>YOLO Detection Training</em>, and <em>COCO Instance Segmentation</em>, are one click to a training-ready configuration. With Pro you can also save your own: format, preprocessing, augmentation, and class selection under a name, shared across the library's projects.</p>
+
+    <h2>What each format preserves</h2>
+    <p>yaAnnotator never throws your work away silently. When a format can't hold a shape, the annotation exports as its bounding box, never dropped, and the export summary counts every one.</p>
+    <table>
+      <thead>
+        <tr><th scope="col"></th><th scope="col">Boxes</th><th scope="col">Polygons</th><th scope="col">Pixel masks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>COCO JSON</strong></td><td>✓</td><td>✓</td><td>✓ exact (RLE)</td></tr>
+        <tr><td><strong>YOLO</strong></td><td>✓</td><td>✓</td><td>box only</td></tr>
+        <tr><td><strong>CVAT XML</strong></td><td>✓</td><td>✓</td><td>box only</td></tr>
+        <tr><td><strong>CreateML JSON</strong></td><td>✓</td><td>box only</td><td>box only</td></tr>
+        <tr><td><strong>Pascal VOC</strong></td><td>✓</td><td>box only</td><td>box only</td></tr>
+        <tr><td><strong>CSV</strong></td><td>✓</td><td>box only</td><td>box only</td></tr>
+      </tbody>
+    </table>
+    <p>A COCO RLE mask imports bit-for-bit and exports bit-for-bit. Resize and augmentation move geometry an RLE mask can't follow, so under those options a mask keeps its correctly transformed box instead, and the summary reports the count. Format-native fields the app doesn't model (COCO <code>info</code>, <code>licenses</code>, <code>iscrowd</code>, custom keys) are preserved verbatim and re-emitted on a same-format export, and label colors round-trip through CVAT.</p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer site-footer--prose">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>

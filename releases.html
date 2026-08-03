@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>yaAnnotator release notes · restinggrumpyface</title>
+  <meta name="description" content="What's new in each version of yaAnnotator, newest first.">
+  <link rel="stylesheet" href="./site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="index.html" class="logo">
+      <span class="logo__dot"></span>
+      restinggrumpyface
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
+      <a href="blog.html" class="nav__link">Blog</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
+        </svg>
+        <svg class="icon-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7L5.3 5.3"/>
+          </g>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="releases-main">
+
+  <nav class="subnav" aria-label="yaAnnotator">
+    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
+    <a href="releases.html" class="subnav__link" aria-current="page">Release notes</a>
+    <a href="help.html" class="subnav__link">Help</a>
+  </nav>
+
+  <header class="releases-head reveal">
+    <div class="eyebrow" style="margin-bottom:16px;">yaAnnotator</div>
+    <h1 class="releases-head__title">Release notes</h1>
+    <p class="releases-head__lede">
+      What's new in each version.
+    </p>
+  </header>
+
+  <article class="release reveal">
+    <div class="release__meta">
+      <span class="release__version">1.2.0</span>
+      <span class="release__date">coming soon</span>
+    </div>
+    <p class="release__summary">Two updates' worth in one release (1.1 never shipped; I just kept going): Smart Select pixel masks, on-canvas proposal review, a stronger built-in detector, batch detection, video-to-frames import, large dataset performance improvements, and near-duplicate cleanup.</p>
+
+    <h3>Headline features</h3>
+    <ul>
+      <li><strong>Smart Select masks.</strong> Smart Select now creates pixel-accurate masks, not just outlines. Refine a mask by adding or removing regions with a click, or re-run segmentation from a box when you want a different result. (Mask creation is Pro; viewing, converting, importing, and exporting masks is free.)</li>
+      <li><strong>Review proposals on the canvas.</strong> Accept or reject model proposals without leaving the image: click to accept one, drag a marquee to select several, or accept them all at once. An inline confidence slider shows proposals appear and drop live, so you can find the right cutoff by eye.</li>
+      <li><strong>A stronger built-in detector.</strong> Detect Multiple now runs RF-DETR Nano instead of YOLOv3: better proposals across the same 80 common classes, still fully on-device.</li>
+      <li><strong>Batch detection.</strong> Select any number of images in the list or grid and run any Detect command over all of them, with proposals accepted automatically.</li>
+      <li><strong>Detect Subjects.</strong> Automatically outline the foreground instances of any class as polygons, so you start from a real segmentation instead of a blank canvas.</li>
+      <li><strong>Import video as frames.</strong> Point yaAnnotator at a video and pull frames into a folder you choose, ready to label. (Pro)</li>
+      <li><strong>Performance improvements.</strong> Large dataset performance improvements across the board, especially when you import and use masks.</li>
+      <li><strong>Near-duplicate cleanup.</strong> Find groups of near-identical images and remove the extras in one action, keeping one per group.</li>
+    </ul>
+
+    <h3>Other improvements</h3>
+    <ul>
+      <li><strong>Annotation layers.</strong> Show or hide boxes, polygons, and masks independently, and convert between them.</li>
+      <li><strong>Masks import and export.</strong> Round-trip masks through COCO RLE and PNG mask sidecars, with no data loss. Importing segmentations as pixel masks is a choice on the import sheet; a plain polygon still imports as a polygon.</li>
+      <li><strong>First-run welcome window.</strong> Jump straight to recent projects, a new or existing project, or Help when you launch.</li>
+      <li><strong>Built-in export presets.</strong> Start from ready-made export recipes instead of a blank configuration.</li>
+      <li><strong>Customize the editor toolbar.</strong> Rearrange it the Mac way, with every toolbar action mirrored in the menus.</li>
+      <li><strong>Paste Annotations from Previous Image (⌥⌘V).</strong> Copy the previous image's annotations onto the current one in a single shortcut, then nudge them into place with the arrow keys, with snapping while you drag.</li>
+      <li><strong>Mark images that have no objects.</strong> Flag background images explicitly; they're counted correctly in filters, badges, and exports.</li>
+      <li><strong>Fill-opacity control and a drag-zoom slider</strong> in the toolbar, for clearer overlays and quicker zooming.</li>
+      <li><strong>Open the Label Manager from anywhere,</strong> not only from the image list.</li>
+      <li><strong>Optional automatic report recompute.</strong> Let the Analyze Annotations report refresh itself as you work, or keep it manual.</li>
+      <li><strong>Safer imports and exports.</strong> A warning when a folder is syncing, a free-space check before export, and an advisory on import help you avoid surprises with your files.</li>
+      <li><strong>Faster with big projects.</strong> Mask imports rasterize in parallel, removing many images at once is dramatically faster, and dense projects scroll more smoothly.</li>
+      <li><strong>Quicker to read at a glance.</strong> Thumbnails break down their annotation counts by kind, and imports name each phase so you know what's happening.</li>
+      <li><strong>More keyboard, better VoiceOver.</strong> Page Up / Page Down step through images everywhere, ⌃⌘L hides labels on the canvas, a loaded custom detector runs with ⇧⌘D, and the grid, list rows, and canvas are more accessible.</li>
+      <li><strong>Mask polish.</strong> Clearer selection, press Return to finish a mask, and layer toggles in the inspector.</li>
+      <li><strong>Sturdier with imperfect files.</strong> Corrupt or unreadable images are caught and reported clearly wherever they turn up.</li>
+      <li><strong>Smart Select mask creation and refinement, and video import, are part of Pro,</strong> with a gentle prompt when you reach for them.</li>
+    </ul>
+
+    <h3>Bug fixes, etc.</h3>
+    <ul>
+      <li>Exports and augmentation passes now add to a folder instead of overwriting what's already there.</li>
+      <li>You can cancel a running video extraction.</li>
+      <li>Unable to cancel a run on sentence that I was writing while trying to create a joke to insert into these release notes.</li>
+      <li>Large or malformed masks no longer cause trouble on import.</li>
+      <li>Fixed a COCO import regression: segmentations default to polygons again, with masks as the opt-in.</li>
+      <li>Fixed label assignment when several annotations were selected at once.</li>
+      <li>Fixed the Simplify action on very large polygons.</li>
+      <li>Fixed a case where an export or backup could be written to the wrong location.</li>
+      <li>Fixed occasional stale values in the inspector after edits.</li>
+      <li>Got you tickets to Taylor's wedding. They are at will-call. I hope you see this message in time.</li>
+    </ul>
+  </article>
+
+  <article class="release reveal">
+    <div class="release__meta">
+      <span class="release__version">1.0.0</span>
+      <span class="release__date">July 1, 2026</span>
+    </div>
+    <p class="release__summary">The first public release. Everything you need to build object-detection datasets entirely on your Mac.</p>
+
+    <h3>Headline features</h3>
+    <ul>
+      <li><strong>Precise annotation.</strong> Draw boxes, polygons, and rotated boxes on a fast native canvas, with full undo/redo and review flags.</li>
+      <li><strong>Model-assisted labeling.</strong> A built-in YOLOv3 detector and Apple Vision give you a first pass instantly. Bring your own Core ML or RF-DETR models, or click to segment with SAM2 Smart Select.</li>
+      <li><strong>Analyze Annotations report.</strong> See class balance, rare-class flags, box geometry, and duplicate or cross-split leakage detection, with clickable charts that filter your images.</li>
+      <li><strong>Annotate Stuff!</strong> Built to support my own annotation needs. This first release is the bare minimum of what I needed to generate a quality dataset.</li>
+    </ul>
+
+    <h3>Other features</h3>
+    <ul>
+      <li><strong>Import and export the formats you use:</strong> COCO, YOLO, CreateML, CVAT, and Pascal VOC, as whole datasets or per split.</li>
+      <li><strong>Fully offline and private.</strong> No accounts, no cloud, no telemetry. Images are referenced in place, never copied or uploaded.</li>
+      <li><strong>Pro, as a one-time purchase:</strong> augmentation on export, isolate objects into a classification dataset, export presets, and unlimited projects.</li>
+    </ul>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="logo__dot"></span>
+      restinggrumpyface.com
+    </div>
+    <div class="site-footer__links">
+      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
+      <!-- <a href="blog.html">Blog</a> -->
+      <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="help.html">Help</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+    </div>
+    <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
+  </div>
+</footer>
+
+<script src="./site.js"></script>
+</body>
+</html>
