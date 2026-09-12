@@ -51,8 +51,37 @@
 
   <article class="release reveal">
     <div class="release__meta">
-      <span class="release__version">1.2.0</span>
+      <span class="release__version">1.3.0</span>
       <span class="release__date">coming soon</span>
+    </div>
+    <p class="release__summary">yaAnnotator now speaks seven more languages. Plus: a crash on macOS 27 fixed, large image libraries much faster to browse, and a window that keeps the width you gave it.</p>
+
+    <h3>Headline features</h3>
+    <ul>
+      <li><strong>Seven new languages.</strong> The interface is fully localized into Simplified Chinese, Japanese, German, French, Korean, Spanish, and Italian.</li>
+    </ul>
+
+    <h3>Other improvements</h3>
+    <ul>
+      <li><strong>Browsing large libraries is substantially faster.</strong> Every row in the image list was rebuilding its context menu from the whole library during layout, so returning from the editor to a big project could stall for seconds, stutter, and drop clicks. Single-column view gains the most.</li>
+      <li><strong>Always a way back.</strong> New <strong>View ▸ Show Sidebar</strong> (⌃⌘S) and <strong>View ▸ Back to Images</strong> (⌘[). A collapsed sidebar, or a toolbar hidden while editing, could previously leave no visible way out of an image.</li>
+      <li><strong>The editor canvas has a minimum width,</strong> the same one the image browser uses.</li>
+      <li><strong>Validated against macOS 27 Golden Gate</strong> with more macOS 27 specific features to come. But we'll cross that bridge when we come to it ...</li>
+    </ul>
+
+    <h3>Bug fixes</h3>
+    <ul>
+      <li>Fixed a crash when opening an image on macOS 27, caused by toolbar layout as the toolbar switched between the browser and the editor.</li>
+      <li>The window no longer resizes itself when you leave the editor. A width you chose is kept.</li>
+    </ul>
+
+    <p class="release__note">Help is still English only, and the translations have not met every native speaker yet. If something in the interface reads wrong in your language, please <a href="support.html">file a bug report</a>. I did my best.</p>
+  </article>
+
+  <article class="release reveal">
+    <div class="release__meta">
+      <span class="release__version">1.2.0</span>
+      <span class="release__date">August 3, 2026</span>
     </div>
     <p class="release__summary">Two updates' worth in one release (1.1 never shipped; I just kept going): Smart Select pixel masks, on-canvas proposal review, a stronger built-in detector, batch detection, video-to-frames import, large dataset performance improvements, and near-duplicate cleanup.</p>
 

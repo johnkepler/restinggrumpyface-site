@@ -979,6 +979,17 @@ code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); 
   color: var(--text);
 }
 .release li strong { font-weight: 600; }
+.release__note {
+  margin: 26px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.release__note a { color: var(--accent); }
 
 /* ===== Blog ===== */
 .blog-main {
