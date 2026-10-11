@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Annotating · yaAnnotator help · restinggrumpyface</title>
   <meta name="description" content="The yaAnnotator window and editor: drawing boxes, polygons, and masks, the inspector, organizing images and splits, and review tools.">
-  <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="/site.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="index.html" class="logo">
+    <a href="/" class="logo">
       <span class="logo__dot"></span>
       restinggrumpyface
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="yaAnnotator.html" class="nav__link">yaAnnotator</a>
-      <a href="blog.html" class="nav__link">Blog</a>
+      <a href="/yaAnnotator" class="nav__link">yaAnnotator</a>
+      <a href="/blog" class="nav__link">Blog</a>
       <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
         <svg class="icon-light" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M20 13.5A8 8 0 1 1 10.5 4a6.3 6.3 0 0 0 9.5 9.5z" fill="currentColor"/>
@@ -36,13 +36,13 @@
 <main class="prose-main">
 
   <nav class="subnav" aria-label="yaAnnotator">
-    <a href="yaAnnotator.html" class="subnav__link">Overview</a>
-    <a href="releases.html" class="subnav__link">Release notes</a>
-    <a href="help.html" class="subnav__link" aria-current="page">Help</a>
+    <a href="/yaAnnotator" class="subnav__link">Overview</a>
+    <a href="/releases" class="subnav__link">Release notes</a>
+    <a href="/help" class="subnav__link" aria-current="page">Help</a>
   </nav>
 
   <header class="prose-head reveal">
-    <div class="eyebrow" style="margin-bottom:16px;"><a href="help.html">yaAnnotator help</a></div>
+    <div class="eyebrow" style="margin-bottom:16px;"><a href="/help">yaAnnotator help</a></div>
     <h1 class="prose-head__title">Annotating</h1>
     <p class="prose-head__lede">
       The window, the editor canvas, and the day-to-day of drawing, refining, and organizing annotations.
@@ -64,7 +64,7 @@
     <ul>
       <li><strong>Box</strong> (B): drag to create. With Select (V), drag the 8 handles to resize or the body to move.</li>
       <li><strong>Polygon</strong> (P): click to drop vertices; close it by clicking the first vertex, double-clicking, or pressing Return. Esc cancels. With Select: drag a vertex to move it, click an edge to add one, or pick a vertex and press ⌫ to remove it.</li>
-      <li><strong>Smart Select</strong> (S): click an object and it traces the outline for you, as a polygon (or a pixel mask, with Pro). See <a href="help-assist.html">Model-assisted labeling</a>.</li>
+      <li><strong>Smart Select</strong> (S): click an object and it traces the outline for you, as a polygon (or a pixel mask, with Pro). See <a href="/help-assist">Model-assisted labeling</a>.</li>
       <li><strong>Combine</strong> (⌘J): ⌘-click several annotations in the Annotations list and merge them into one. Boxes merge into one enclosing box; with a polygon in the mix, the pieces are stitched into a single outline.</li>
       <li><strong>Convert to rotated box</strong> (⇧⌘R): replace a polygon, or a multi-selection, with its tightest oriented rectangle. Good for long, angled objects where an upright box would be loose.</li>
       <li><strong>Nudge</strong> a selection one pixel with the arrow keys (⇧ for ten); hold ⌥ while dragging to skip edge snapping; drag a marquee on empty canvas to select several annotations.</li>
@@ -91,7 +91,7 @@
     <h2>Reviewing</h2>
     <ul>
       <li>Mark an image <strong>approved</strong> with the seal button or ⇧⌘A; the Filter menu can narrow to Approved or Not Approved.</li>
-      <li>Confirm a truly-empty image with <strong>Mark as Null</strong> (∅). The report then treats it as a confirmed negative, and export can drop the unconfirmed ones. See <a href="help-report.html">Analyze Annotations</a>.</li>
+      <li>Confirm a truly-empty image with <strong>Mark as Null</strong> (∅). The report then treats it as a confirmed negative, and export can drop the unconfirmed ones. See <a href="/help-report">Analyze Annotations</a>.</li>
     </ul>
 
     <h2>Notes</h2>
@@ -108,18 +108,18 @@
       restinggrumpyface.com
     </div>
     <div class="site-footer__links">
-      <!-- <a href="yaAnnotator.html">yaAnnotator</a> -->
-      <!-- <a href="blog.html">Blog</a> -->
+      <!-- <a href="/yaAnnotator">yaAnnotator</a> -->
+      <!-- <a href="/blog">Blog</a> -->
       <a href="https://github.com/johnkepler/restinggrumpyface-site/issues" target="_blank" rel="noopener">GitHub</a>
-      <a href="help.html">Help</a>
-      <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
-      <!-- <a href="acknowledgements.html">Acknowledgements</a> -->
+      <a href="/help">Help</a>
+      <a href="/support">Support</a>
+      <a href="/privacy">Privacy</a>
+      <!-- <a href="/acknowledgements">Acknowledgements</a> -->
     </div>
     <div class="site-footer__copy">© <span data-year>2026</span> John Kepler</div>
   </div>
 </footer>
 
-<script src="./site.js"></script>
+<script src="/site.js"></script>
 </body>
 </html>
